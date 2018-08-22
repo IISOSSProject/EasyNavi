@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EasyNavi.Core.Views.MainMenuView"
+             xmlns:common="clr-namespace:EasyNavi.Core.Common;"
+             xmlns:vm="clr-namespace:EasyNavi.Core.ViewModels;"
+             Appearing="MainMenuView_Appearing"
+             Disappearing="MainMenuView_Disappearing">
+    <ContentPage.BindingContext>
+        <vm:MainMenuViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,20,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="{common:ImageResource Background}" Aspect="AspectFill" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+
+            <Grid Margin="0,10,0,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="{common:ImageResource MainTitle}" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.ColumnSpan="3" Grid.Row="0"/>
+
+                <StackLayout Grid.Column="1" Grid.Row="1" VerticalOptions="Center">
+                    <Grid HeightRequest="90">
+                        <Image Source="{common:ImageResource MainContentsButton}" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="Start">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoContentsViewCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <StackLayout VerticalOptions="End" HorizontalOptions="Start" Margin="90,7" BackgroundColor="#80000000" Spacing="0" Padding="10,2">
+                            <Label Text=" " FontSize="Large" TextColor="White" FontAttributes="Bold"/>
+                            <Label Text="メインコンテンツ" FontSize="Large" TextColor="White" FontAttributes="Bold"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoContentsViewCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </Grid>
+                    <Grid HeightRequest="90">
+                        <Image Source="{common:ImageResource MainContents3Button}" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="Start">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoContentsViewCommand}"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <StackLayout VerticalOptions="End" HorizontalOptions="Start" Margin="90,7" BackgroundColor="#80000000" Spacing="0" Padding="10,2">
+                            <Label Text=" " FontSize="Large" TextColor="White" FontAttributes="Bold"/>
+                            <Label Text="メインコンテンツ" FontSize="Large" TextColor="White" FontAttributes="Bold"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoContentsViewCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </Grid>
+                </StackLayout>
+
+                <Image Source="{common:ImageResource MainContents2Button}" Aspect="AspectFit" HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Column="1" Grid.Row="4">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding GoWebSites4ViewCommand}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+                <StackLayout Grid.Column="1" Grid.Row="2" HorizontalOptions="Center">
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoWebSitesViewCommand}"/>
+                        </StackLayout.GestureRecognizers>
+                        <Image Source="{common:ImageResource WebSites}" Aspect="AspectFill" HeightRequest="40" WidthRequest="40"/>
+                        <Label TextColor="White" FontSize="Medium" Text="{common:TextResource WebSites}" VerticalOptions="Center" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoWebSites2ViewCommand}"/>
+                        </StackLayout.GestureRecognizers>
+                        <Image Source="{common:ImageResource WebSites}" Aspect="AspectFill" HeightRequest="40" WidthRequest="40"/>
+                        <Label TextColor="White" FontSize="Medium" Text="{common:TextResource WebSites2}" VerticalOptions="Center" />
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+
+            <Label Text="LICENSE" HorizontalOptions="End" VerticalOptions="End" TextColor="White">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="License_Clicked"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+            <Grid BackgroundColor="Black" Opacity="0.5" IsVisible="{Binding IsVisible, Source={x:Reference activityIndicator}}"/>
+            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsRunning="True" x:Name="activityIndicator" IsVisible="{Binding IsDataUpdating}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EasyNavi.Plugin.License.Views.LicensesPage"
+             xmlns:vm="clr-namespace:EasyNavi.Plugin.License.ViewModels;"
+             >
+    <ContentPage.BindingContext>
+        <vm:LicensesPageViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,20,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid BackgroundColor="Black">
+                <Label Text="&lt; 戻る " HorizontalOptions="Start" Margin="5,3" VerticalOptions="Center" TextColor="White">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Back_Tapped"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="著作権情報 " TextColor="White"/>
+                </StackLayout>
+            </Grid>
+
+            <ListView HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="1" HasUnevenRows="True" ItemsSource="{Binding Items}" x:Name="listView" ItemSelected="List_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="2,5,2,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Name}" FontSize="Medium" HorizontalOptions="Center"/>
+                                <Label Text="{Binding Body}" Grid.Row="1" FontSize="Micro"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

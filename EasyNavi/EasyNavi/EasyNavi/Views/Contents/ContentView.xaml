@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EasyNavi.Core.Views.Contents.ContentView"
+             xmlns:common="clr-namespace:EasyNavi.Core.Common;"
+             xmlns:vm="clr-namespace:EasyNavi.Core.ViewModels.Contents;"
+             Appearing="ContentView_Appearing"
+             Disappearing="ContentView_Disappearing"
+             x:Name="page">
+    <ContentPage.BindingContext>
+        <vm:ContentViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,20,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="{common:ImageResource Background}" Aspect="AspectFill" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+            <Grid BackgroundColor="White" Opacity="0"/>
+
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid BackgroundColor="Black" HorizontalOptions="Fill">
+                    <Label Text="{common:TextResource Detail}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Image Source="{common:ImageResource BackButton}" Aspect="AspectFit" HorizontalOptions="Start" Margin="5,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Back_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+                <Grid BackgroundColor="#80FFFFFF" HorizontalOptions="Fill" Grid.Row="1" HeightRequest="60" Padding="2">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="{Binding TopImage.ImageSource}" Aspect="AspectFit" HeightRequest="56" Margin="2"/>
+                        <Label Text="{Binding ContentName}" FontSize="Large" VerticalOptions="Center" TextColor="Black"/>
+                    </StackLayout>
+                </Grid>
+
+                <ScrollView Grid.Row="2" Margin="0,10">
+                    <StackLayout Spacing="0" Margin="5,0,5,20">
+                        <StackLayout.Resources>
+                            <ResourceDictionary>
+                                <Style x:Key="LabelStyle" TargetType="Label">
+                                    <Setter Property="TextColor" Value="White"/>
+                                    <Setter Property="LineBreakMode" Value="CharacterWrap"/>
+                                    <Setter Property="FontSize" Value="Medium"/>
+                                    <Setter Property="VerticalOptions" Value="Center"/>
+                                </Style>
+                                <Style x:Key="TitleStyle" TargetType="Label" BasedOn="{StaticResource LabelStyle}">
+                                    <Setter Property="WidthRequest" Value="50"/>
+                                    <Setter Property="HorizontalTextAlignment" Value="End"/>
+                                    <Setter Property="FontSize" Value="Micro"/>
+                                    <Setter Property="TextColor" Value="LightGray"/>
+                                </Style>
+                                <Style x:Key="ValueStyle" TargetType="Label" BasedOn="{StaticResource LabelStyle}">
+                                </Style>
+                            </ResourceDictionary>
+                        </StackLayout.Resources>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding ZipCode}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding Address}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding ContactName}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding TelNo}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding Traffic}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding Parking}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding Money}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding OpenHour}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding HoliDay}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding URL}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}" TextColor="Blue">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.GoWebSiteViewCommand, Source={x:Reference page}}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" BindingContext="{Binding YouTube}" IsVisible="{Binding HasValue}">
+                            <Label Text="{Binding Title}" Style="{StaticResource TitleStyle}"/>
+                            <Label Text="{Binding Value}" Style="{StaticResource ValueStyle}" TextColor="Blue">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.GoYouTubeViewCommand, Source={x:Reference page}}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+
+                        <Label Text="{Binding ContentDetail}" LineBreakMode="CharacterWrap" TextColor="LightGray" FontSize="Medium" Margin="10"/>
+                    </StackLayout>
+                </ScrollView>
+
+                <ScrollView Orientation="Horizontal" Grid.Row="3" IsVisible="{Binding HasDetailImages}">
+                    <StackLayout Orientation="Horizontal" HeightRequest="150" Margin="0,2">
+                        <Image Source="{Binding DetailImage01.ImageSource}" IsVisible="{Binding DetailImage01.HasImage}" Aspect="AspectFit" WidthRequest="200" Margin="1,0"/>
+                        <Image Source="{Binding DetailImage02.ImageSource}" IsVisible="{Binding DetailImage02.HasImage}" Aspect="AspectFit" WidthRequest="200" Margin="1,0"/>
+                        <Image Source="{Binding DetailImage03.ImageSource}" IsVisible="{Binding DetailImage03.HasImage}" Aspect="AspectFit" WidthRequest="200" Margin="1,0"/>
+                        <Image Source="{Binding DetailImage04.ImageSource}" IsVisible="{Binding DetailImage04.HasImage}" Aspect="AspectFit" WidthRequest="200" Margin="1,0"/>
+                        <Image Source="{Binding DetailImage05.ImageSource}" IsVisible="{Binding DetailImage05.HasImage}" Aspect="AspectFit" WidthRequest="200" Margin="1,0"/>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

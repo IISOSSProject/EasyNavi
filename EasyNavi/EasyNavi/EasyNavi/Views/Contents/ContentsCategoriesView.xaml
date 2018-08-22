@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EasyNavi.Core.Views.Contents.ContentsCategoriesView"
+             xmlns:common="clr-namespace:EasyNavi.Core.Common;"
+             xmlns:vm="clr-namespace:EasyNavi.Core.ViewModels.Contents;"
+             Appearing="ContentsCategoriesView_Appearing"
+             Disappearing="ContentsCategoriesView_Disappearing"
+             x:Name="page">
+    <ContentPage.BindingContext>
+        <vm:ContentsCategoriesViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,20,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <Grid>
+            <Image Source="{common:ImageResource Background}" Aspect="AspectFill" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+            <Grid BackgroundColor="White" Opacity="0"/>
+
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid BackgroundColor="Black" HorizontalOptions="Fill">
+                    <Label Text="{common:TextResource Category}" TextColor="White" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Image Source="{common:ImageResource BackButton}" Aspect="AspectFit" HorizontalOptions="Start" Margin="5,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Back_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+                <Grid BackgroundColor="#80FFFFFF" HorizontalOptions="Fill" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Entry Margin="5" Text="{Binding SearchText}"/>
+                    <Image Source="{common:ImageResource SearchButton}" Aspect="AspectFit" HorizontalOptions="Start" Margin="5" Grid.Column="1">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SearchCommand}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+                <ListView HorizontalOptions="Fill" VerticalOptions="Fill" Grid.Row="2" x:Name="listView" HasUnevenRows="True" ItemsSource="{Binding Items}" ItemSelected="List_ItemSelected" BackgroundColor="Transparent" SeparatorColor="White">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Padding="0,5">
+                                    <Image Source="{Binding Icon}" Aspect="AspectFit" HorizontalOptions="Start" VerticalOptions="Center" Margin="5" WidthRequest="60" HeightRequest="60"/>
+                                    <Label Text="{Binding CategoryName}" FontSize="Large" TextColor="White" VerticalOptions="Center" Margin="10"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

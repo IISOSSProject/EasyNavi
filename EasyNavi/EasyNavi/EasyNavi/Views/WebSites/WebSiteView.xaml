@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EasyNavi.Core.Views.WebSites.WebSiteView"
+             xmlns:common="clr-namespace:EasyNavi.Core.Common;"
+             xmlns:vm="clr-namespace:EasyNavi.Core.ViewModels.WebSites;">
+    <ContentPage.BindingContext>
+        <vm:WebSiteViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,20,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid BackgroundColor="Black" HorizontalOptions="Fill">
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Start" VerticalOptions="Center">
+                    <Image Source="{common:ImageResource BackButton}" Aspect="AspectFit" HorizontalOptions="Start" Margin="5,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Back_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Text="{Binding Title}" TextColor="White" VerticalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+
+            <WebView Grid.Row="1" Source="{Binding Uri}" Navigated="WebSiteView_Navigated" x:Name="webView"/>
+
+            <Label Grid.Row="2" x:Name="url" FontSize="Micro"/>
+        </Grid>
+
+    </ContentPage.Content>
+</ContentPage>

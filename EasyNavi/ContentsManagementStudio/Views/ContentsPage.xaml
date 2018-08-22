@@ -1,0 +1,45 @@
+﻿<Page x:Class="ContentsManagementStudio.Views.ContentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ContentsManagementStudio.Views"
+      xmlns:vm="clr-namespace:ContentsManagementStudio.ViewModels"
+      x:Name="page"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="ContentsPage">
+    <Page.DataContext>
+        <vm:ContentsPageViewModel/>
+    </Page.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="Black"/>
+        <Button Content="Add" Command="{Binding SelectedCommand}" HorizontalAlignment="Left" Padding="5" Margin="5"/>
+        <Button Content="Save" Command="{Binding SaveCommand}" HorizontalAlignment="Center" Padding="5" Margin="5"/>
+        <Button Content="Open" Command="{Binding OpenCommand}" HorizontalAlignment="Right" Padding="5" Margin="5"/>
+
+        <ListBox Grid.Row="1" ItemsSource="{Binding Items}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,5">
+                            <Button Content="Select" Command="{Binding DataContext.SelectedCommand, ElementName=page}" CommandParameter="{Binding}" VerticalAlignment="Center" Padding="5" Margin="5"/>
+                            <Border BorderBrush="LightGray" BorderThickness="1" VerticalAlignment="Center">
+                                <Image Source="{Binding TopImage}" Width="80" MinHeight="60"/>
+                            </Border>
+                            <TextBlock Text="{Binding ContentName}" VerticalAlignment="Center" Width="200" Margin="5"/>
+                            <TextBlock Text="|" Margin="20,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding ContentDetail}" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

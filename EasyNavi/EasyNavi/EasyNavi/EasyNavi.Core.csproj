@@ -1,0 +1,97 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\BackButton.png" />
+    <None Remove="Resources\Images\Background.png" />
+    <None Remove="Resources\Images\CategoryGourmet.png" />
+    <None Remove="Resources\Images\CategoryLocalGourmet.png" />
+    <None Remove="Resources\Images\CategoryPresent.png" />
+    <None Remove="Resources\Images\CategorySpecial.png" />
+    <None Remove="Resources\Images\CategoryStaySpring.png" />
+    <None Remove="Resources\Images\CategoryToiletParking.png" />
+    <None Remove="Resources\Images\CategoryTransferLife.png" />
+    <None Remove="Resources\Images\contents.png" />
+    <None Remove="Resources\Images\Facebook.png" />
+    <None Remove="Resources\Images\ForwardButton.png" />
+    <None Remove="Resources\Images\MainContents2Button.png" />
+    <None Remove="Resources\Images\MainContents3Button.png" />
+    <None Remove="Resources\Images\MainContentsButton.png" />
+    <None Remove="Resources\Images\MainTitle.png" />
+    <None Remove="Resources\Images\NoImage.png" />
+    <None Remove="Resources\Images\SearchButton.png" />
+    <None Remove="Resources\Images\Twitter.png" />
+    <None Remove="Resources\Images\WebSites.png" />
+    <None Remove="Resources\LocalSourceData\ContentsData.zip" />
+    <None Remove="Resources\LocalSourceData\Versions.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\BackButton.png" />
+    <EmbeddedResource Include="Resources\Images\Background.png" />
+    <EmbeddedResource Include="Resources\Images\CategoryGourmet.png" />
+    <EmbeddedResource Include="Resources\Images\CategoryLocalGourmet.png" />
+    <EmbeddedResource Include="Resources\Images\CategoryPresent.png" />
+    <EmbeddedResource Include="Resources\Images\CategorySpecial.png" />
+    <EmbeddedResource Include="Resources\Images\CategoryStaySpring.png" />
+    <EmbeddedResource Include="Resources\Images\CategoryToiletParking.png" />
+    <EmbeddedResource Include="Resources\Images\CategoryTransferLife.png" />
+    <EmbeddedResource Include="Resources\Images\Contents.png" />
+    <EmbeddedResource Include="Resources\Images\ForwardButton.png" />
+    <EmbeddedResource Include="Resources\Images\MainContents2Button.png" />
+    <EmbeddedResource Include="Resources\Images\MainContents3Button.png" />
+    <EmbeddedResource Include="Resources\Images\MainContentsButton.png" />
+    <EmbeddedResource Include="Resources\Images\MainTitle.png" />
+    <EmbeddedResource Include="Resources\Images\NoImage.png" />
+    <EmbeddedResource Include="Resources\Images\SearchButton.png" />
+    <EmbeddedResource Include="Resources\Images\WebSites.png" />
+    <EmbeddedResource Include="Resources\LocalSourceData\Versions.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.4.118" />
+    <PackageReference Include="System.Net.Http" Version="4.3.3" />
+    <PackageReference Include="Unity" Version="5.5.6" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.121934" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\EasyNavi.Models.APIJsonModels\EasyNavi.Models.APIJsonModels.csproj" />
+    <ProjectReference Include="..\..\EasyNavi.Plugin.License\EasyNavi.Plugin.License.csproj" />
+    <ProjectReference Include="..\..\EasyNavi.PluginInterfaces\EasyNavi.PluginInterfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
+      <DependentUpon>*.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Contents\ContentsCategoriesView.xaml.cs">
+      <DependentUpon>ContentsCategoriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MainMenuView.xaml.cs">
+      <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\Contents\ContentsCategoriesView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Contents\ContentsView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Contents\ContentView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MainMenuView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\WebSites\WebSiteView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>
